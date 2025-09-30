@@ -1,0 +1,133 @@
+[
+  {
+    "instruction": "Write a poem in the style of Edgar Allan Poe.",
+    "input_text": "",
+    "output_text": "Once upon a midnight dreary, while I pondered, weak and weary,\nOver many a quaint and curious volume of forgotten lore—\nWhile I nodded, nearly napping, suddenly there came a tapping,\nAs of some one gently rapping, rapping at my chamber door.",
+    "stylometric_features": {
+      "total_lines": 4,
+      "total_stanzas": 1,
+      "avg_lines_per_stanza": 4.0,
+      "poem_ttr": 0.8333333333333334,
+      "poem_lexical_density": 0.5952380952380952,
+      "dominant_meter": "iambic",
+      "rhyme_scheme": "ABAB"
+    },
+    "poet_name": "Edgar Allan Poe",
+    "poem_title": "The Raven (excerpt)",
+    "line_number": null
+  },
+  {
+    "instruction": "Continue this poem in the style of Emily Dickinson:",
+    "input_text": "Hope is the thing with feathers\nThat perches in the soul,\nAnd sings the tune without the words,",
+    "output_text": "And never stops at all.",
+    "stylometric_features": {
+      "line_length": 5,
+      "character_count": 23,
+      "syllable_count": 6,
+      "avg_word_length": 3.8,
+      "lexical_density": 0.6,
+      "rhyme_position": "end",
+      "meter_pattern": "short",
+      "punctuation_pattern": {
+        "comma": 0,
+        "period": 1,
+        "dash": 0,
+        "question": 0,
+        "exclamation": 0,
+        "semicolon": 0,
+        "colon": 0
+      },
+      "capitalization_pattern": {
+        "capitalized_words": 1,
+        "all_caps_words": 0,
+        "irregular_caps": false
+      },
+      "special_characters": {
+        "dashes": 0,
+        "apostrophes": 0,
+        "quotation_marks": 0,
+        "parentheses": 0,
+        "brackets": 0
+      }
+    },
+    "poet_name": "Emily Dickinson",
+    "poem_title": "Hope is the thing with feathers",
+    "line_number": 3
+  },
+  {
+    "instruction": "Continue this poem in the style of Edgar Allan Poe:",
+    "input_text": "Once upon a midnight dreary, while I pondered, weak and weary,\nOver many a quaint and curious volume of forgotten lore—\nWhile I nodded, nearly napping, suddenly there came a tapping,",
+    "output_text": "As of some one gently rapping, rapping at my chamber door.",
+    "stylometric_features": {
+      "line_length": 11,
+      "character_count": 58,
+      "syllable_count": 15,
+      "avg_word_length": 4.363636363636363,
+      "lexical_density": 0.5454545454545454,
+      "rhyme_position": "end",
+      "meter_pattern": "long",
+      "punctuation_pattern": {
+        "comma": 1,
+        "period": 1,
+        "dash": 0,
+        "question": 0,
+        "exclamation": 0,
+        "semicolon": 0,
+        "colon": 0
+      },
+      "capitalization_pattern": {
+        "capitalized_words": 1,
+        "all_caps_words": 0,
+        "irregular_caps": false
+      },
+      "special_characters": {
+        "dashes": 0,
+        "apostrophes": 0,
+        "quotation_marks": 0,
+        "parentheses": 0,
+        "brackets": 0
+      }
+    },
+    "poet_name": "Edgar Allan Poe",
+    "poem_title": "The Raven (excerpt)",
+    "line_number": 3
+  },
+  {
+    "instruction": "Continue this poem in the style of Walt Whitman:",
+    "input_text": "I celebrate myself, and sing myself,",
+    "output_text": "And what I assume you shall assume,",
+    "stylometric_features": {
+      "line_length": 7,
+      "character_count": 35,
+      "syllable_count": 9,
+      "avg_word_length": 4.142857142857143,
+      "lexical_density": 0.5714285714285714,
+      "rhyme_position": "odd",
+      "meter_pattern": "medium",
+      "punctuation_pattern": {
+        "comma": 1,
+        "period": 0,
+        "dash": 0,
+        "question": 0,
+        "exclamation": 0,
+        "semicolon": 0,
+        "colon": 0
+      },
+      "capitalization_pattern": {
+        "capitalized_words": 2,
+        "all_caps_words": 0,
+        "irregular_caps": true
+      },
+      "special_characters": {
+        "dashes": 0,
+        "apostrophes": 0,
+        "quotation_marks": 0,
+        "parentheses": 0,
+        "brackets": 0
+      }
+    },
+    "poet_name": "Walt Whitman",
+    "poem_title": "Song of Myself (excerpt)",
+    "line_number": 1
+  }
+]

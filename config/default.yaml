@@ -1,0 +1,35 @@
+# Default configuration for Stylistic Poetry LLM Framework
+
+model:
+  base_model_name: "gpt2"
+  max_length: 512
+  temperature: 0.8
+  top_p: 0.9
+  top_k: 50
+  num_return_sequences: 1
+
+training:
+  learning_rate: 5.0e-05
+  batch_size: 8
+  num_epochs: 3
+  warmup_steps: 500
+  save_steps: 1000
+  eval_steps: 500
+  gradient_accumulation_steps: 1
+
+data:
+  data_dir: "data"
+  output_dir: "models"
+  max_poems_per_poet: 1000
+  min_line_length: 3
+  max_line_length: 200
+
+evaluation:
+  enable_quantitative: true
+  enable_qualitative: true
+  comparison_poets: []
+  metrics_output_dir: "results"
+
+log_level: "INFO"
+device: "auto"
+random_seed: 42

@@ -1,0 +1,35 @@
+{
+  "test_config": {
+    "average_latency_ms": 100.0,
+    "average_memory_mb": 200.0,
+    "success_rate": 1.0,
+    "updated_at": "2025-09-27T17:28:01.323764"
+  },
+  "low_complexity": {
+    "average_latency_ms": 121.36784000012995,
+    "median_latency_ms": 120.91990000044461,
+    "p95_latency_ms": 123.4997999999905,
+    "average_memory_mb": 484.84296875,
+    "peak_memory_mb": 484.84765625,
+    "success_rate": 1.0,
+    "updated_at": "2025-09-27T16:53:54.278538"
+  },
+  "medium_complexity": {
+    "average_latency_ms": 265.61707499990916,
+    "median_latency_ms": 261.722049999662,
+    "p95_latency_ms": 278.37559999989026,
+    "average_memory_mb": 484.84375,
+    "peak_memory_mb": 484.84765625,
+    "success_rate": 0.8,
+    "updated_at": "2025-09-27T16:53:54.377917"
+  },
+  "high_complexity": {
+    "average_latency_ms": 429.5028999999886,
+    "median_latency_ms": 424.41885000016555,
+    "p95_latency_ms": 448.50659999974596,
+    "average_memory_mb": 485.076171875,
+    "peak_memory_mb": 485.09765625,
+    "success_rate": 0.8,
+    "updated_at": "2025-09-27T16:53:54.776743"
+  }
+}

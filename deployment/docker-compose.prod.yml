@@ -1,0 +1,125 @@
+version: '3.8'
+
+services:
+  poetry-llm:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: stylistic-poetry-llm-prod
+    restart: always
+    volumes:
+      - ../data:/app/data:ro
+      - poetry_output:/app/output
+      - poetry_logs:/app/logs
+      - poetry_models:/app/models
+      - ../config/production.yaml:/app/config/local.yaml:ro
+    environment:
+      - POETRY_LLM_LOG_LEVEL=INFO
+      - POETRY_LLM_DATA_DIR=/app/data
+      - POETRY_LLM_OUTPUT_DIR=/app/output
+      - POETRY_LLM_ENABLE_GPU=false
+      - POETRY_LLM_MAX_CONCURRENT_REQUESTS=50
+    networks:
+      - poetry_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+        reservations:
+          memory: 2G
+          cpus: '1.0'
+
+  nginx:
+    image: nginx:alpine
+    container_name: poetry-llm-nginx-prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    depends_on:
+      - poetry-llm
+    networks:
+      - poetry_network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+
+  redis:
+    image: redis:7-alpine
+    container_name: poetry-llm-redis-prod
+    restart: always
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - poetry_network
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: poetry-llm-prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - poetry_network
+    profiles:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: poetry-llm-grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - poetry_network
+    profiles:
+      - monitoring
+
+volumes:
+  poetry_output:
+  poetry_logs:
+  poetry_models:
+  redis_data:
+  nginx_logs:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  poetry_network:
+    driver: bridge

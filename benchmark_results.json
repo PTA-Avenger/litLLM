@@ -1,0 +1,262 @@
+[
+  {
+    "configuration_name": "low_complexity",
+    "average_latency_ms": 121.36784000012995,
+    "median_latency_ms": 120.91990000044461,
+    "p95_latency_ms": 123.4997999999905,
+    "average_memory_mb": 484.84296875,
+    "peak_memory_mb": 484.84765625,
+    "success_rate": 1.0,
+    "total_runs": 5,
+    "timestamp": "2025-09-27T16:53:37.243940",
+    "metrics": [
+      {
+        "latency_ms": 120.23320000025706,
+        "memory_usage_mb": 484.83984375,
+        "peak_memory_mb": 484.84375,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:32.690749",
+        "operation": "benchmark_low_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 1,
+          "temperature": 0.7,
+          "max_length": 100,
+          "failure_rate": 0.0
+        }
+      },
+      {
+        "latency_ms": 120.91990000044461,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:33.454006",
+        "operation": "benchmark_low_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 1,
+          "temperature": 0.7,
+          "max_length": 100,
+          "failure_rate": 0.0
+        }
+      },
+      {
+        "latency_ms": 120.59130000034202,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:34.577811",
+        "operation": "benchmark_low_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 1,
+          "temperature": 0.7,
+          "max_length": 100,
+          "failure_rate": 0.0
+        }
+      },
+      {
+        "latency_ms": 121.59499999961554,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:35.626738",
+        "operation": "benchmark_low_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 1,
+          "temperature": 0.7,
+          "max_length": 100,
+          "failure_rate": 0.0
+        }
+      },
+      {
+        "latency_ms": 123.4997999999905,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:36.443243",
+        "operation": "benchmark_low_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 1,
+          "temperature": 0.7,
+          "max_length": 100,
+          "failure_rate": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "configuration_name": "medium_complexity",
+    "average_latency_ms": 265.61707499990916,
+    "median_latency_ms": 261.722049999662,
+    "p95_latency_ms": 278.37559999989026,
+    "average_memory_mb": 484.84375,
+    "peak_memory_mb": 484.84765625,
+    "success_rate": 0.8,
+    "total_runs": 5,
+    "timestamp": "2025-09-27T16:53:43.643597",
+    "metrics": [
+      {
+        "latency_ms": 262.10659999924246,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:37.922552",
+        "operation": "benchmark_medium_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 2,
+          "temperature": 0.8,
+          "max_length": 200,
+          "failure_rate": 0.05
+        }
+      },
+      {
+        "latency_ms": 261.3375000000815,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:40.337427",
+        "operation": "benchmark_medium_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 2,
+          "temperature": 0.8,
+          "max_length": 200,
+          "failure_rate": 0.05
+        }
+      },
+      {
+        "latency_ms": 278.37559999989026,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:41.255798",
+        "operation": "benchmark_medium_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 2,
+          "temperature": 0.8,
+          "max_length": 200,
+          "failure_rate": 0.05
+        }
+      },
+      {
+        "latency_ms": 260.64860000042245,
+        "memory_usage_mb": 484.84375,
+        "peak_memory_mb": 484.84765625,
+        "cpu_usage_percent": 5.994661011021995,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:42.654885",
+        "operation": "benchmark_medium_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 2,
+          "temperature": 0.8,
+          "max_length": 200,
+          "failure_rate": 0.05
+        }
+      }
+    ]
+  },
+  {
+    "configuration_name": "high_complexity",
+    "average_latency_ms": 429.5028999999886,
+    "median_latency_ms": 424.41885000016555,
+    "p95_latency_ms": 448.50659999974596,
+    "average_memory_mb": 485.076171875,
+    "peak_memory_mb": 485.09765625,
+    "success_rate": 0.8,
+    "total_runs": 5,
+    "timestamp": "2025-09-27T16:53:52.873357",
+    "metrics": [
+      {
+        "latency_ms": 421.66379999980563,
+        "memory_usage_mb": 485.0703125,
+        "peak_memory_mb": 485.07421875,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:45.722301",
+        "operation": "benchmark_high_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 3,
+          "temperature": 0.9,
+          "max_length": 300,
+          "failure_rate": 0.1
+        }
+      },
+      {
+        "latency_ms": 427.17390000052546,
+        "memory_usage_mb": 485.0703125,
+        "peak_memory_mb": 485.07421875,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:47.125738",
+        "operation": "benchmark_high_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 3,
+          "temperature": 0.9,
+          "max_length": 300,
+          "failure_rate": 0.1
+        }
+      },
+      {
+        "latency_ms": 420.6672999998773,
+        "memory_usage_mb": 485.0703125,
+        "peak_memory_mb": 485.07421875,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:48.421730",
+        "operation": "benchmark_high_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 3,
+          "temperature": 0.9,
+          "max_length": 300,
+          "failure_rate": 0.1
+        }
+      },
+      {
+        "latency_ms": 448.50659999974596,
+        "memory_usage_mb": 485.09375,
+        "peak_memory_mb": 485.09765625,
+        "cpu_usage_percent": 0.0,
+        "gpu_memory_mb": null,
+        "gpu_utilization_percent": null,
+        "timestamp": "2025-09-27T16:53:49.904041",
+        "operation": "benchmark_high_complexity",
+        "model_name": "unknown",
+        "configuration": {
+          "complexity": 3,
+          "temperature": 0.9,
+          "max_length": 300,
+          "failure_rate": 0.1
+        }
+      }
+    ]
+  }
+]
