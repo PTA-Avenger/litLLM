@@ -177,8 +177,9 @@ class DickinsonPromptEngineer:
         )
         
         return f"{prompt}\n\nMeter guidance: {meter_instruction}"
-c
-lass CommonMeterSubverter:
+
+
+class CommonMeterSubverter:
     """Handles common meter subversion modeling and application."""
     
     def __init__(self):
@@ -310,8 +311,7 @@ lass CommonMeterSubverter:
                      if abs(a - t) <= tolerance)
         
         return matches / len(target)
-class D
-ickinsonStyleValidator:
+class DickinsonStyleValidator:
     """Validates generated poetry for Dickinson style consistency."""
     
     def __init__(self):
@@ -450,8 +450,10 @@ ickinsonStyleValidator:
                         f"target: {validation['target']:.2f} adherence)"
                     )
         
-        return suggestionsclass Dic
-kinsonPoetryGenerator:
+        return suggestions
+
+
+class DickinsonPoetryGenerator:
     """Main class for Dickinson-specific poetry generation."""
     
     def __init__(self, base_model: PoetryGenerationModel):

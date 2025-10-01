@@ -261,7 +261,7 @@ class PoetryLLMSystem:
             self.status.components_loaded['output_formatter'] = True
             
             # Performance monitoring
-            self.performance_monitor = PerformanceMonitor()
+            self.performance_monitor = create_performance_monitor()
             self.status.components_loaded['performance_monitor'] = True
             return True
             

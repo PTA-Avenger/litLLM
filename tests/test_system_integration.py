@@ -16,7 +16,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from stylometric.system_integration import (
-    PoetryLLMSystem, SystemStatus, initialize_poetry_system, get_poetry_system
+    PoetryLLMSystem, SystemStatus, initialize_global_system, get_global_system
 )
 from config.settings import SystemConfig
 from utils.exceptions import PoetryLLMError, ConfigurationError, ValidationError
@@ -274,7 +274,7 @@ class TestEndToEndWorkflow:
         mock_init.return_value = True
         
         # Test initialization
-        result = initialize_poetry_system(
+        result = initialize_global_system(
             config_path=None,
             log_level="DEBUG",
             enable_error_recovery=False,
@@ -290,11 +290,11 @@ class TestEndToEndWorkflow:
     
     def test_get_global_system(self):
         """Test getting global system instance."""
-        system = get_poetry_system()
+        system = get_global_system()
         assert isinstance(system, PoetryLLMSystem)
         
         # Should return the same instance
-        system2 = get_poetry_system()
+        system2 = get_global_system()
         assert system is system2
     
     @patch('stylometric.system_integration.PoetryLLMSystem._initialize_components')

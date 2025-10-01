@@ -316,3 +316,190 @@ class PoetProfileBuilder:
             return {k: v / total for k, v in counts.items()}
         else:
             return {}
+
+
+class PoetProfileManager:
+    """Manager class for poet profiles with loading, saving, and comparison functionality."""
+    
+    def __init__(self, profiles_dir: Optional[Path] = None):
+        """
+        Initialize the poet profile manager.
+        
+        Args:
+            profiles_dir: Directory to store poet profiles (default: ./data/profiles)
+        """
+        self.profiles_dir = profiles_dir or Path("./data/profiles")
+        self.profiles_dir.mkdir(parents=True, exist_ok=True)
+        self._loaded_profiles: Dict[str, PoetProfile] = {}
+    
+    def load_profile(self, poet_name: str) -> Optional[PoetProfile]:
+        """
+        Load a poet profile from disk.
+        
+        Args:
+            poet_name: Name of the poet
+            
+        Returns:
+            PoetProfile if found, None otherwise
+        """
+        if poet_name in self._loaded_profiles:
+            return self._loaded_profiles[poet_name]
+        
+        profile_path = self.profiles_dir / f"{poet_name}.json"
+        
+        if profile_path.exists():
+            try:
+                with open(profile_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                
+                profile = PoetProfile.from_dict(data)
+                self._loaded_profiles[poet_name] = profile
+                return profile
+                
+            except Exception as e:
+                print(f"Error loading profile for {poet_name}: {e}")
+                return None
+        
+        return None
+    
+    def save_profile(self, profile: PoetProfile) -> bool:
+        """
+        Save a poet profile to disk.
+        
+        Args:
+            profile: PoetProfile to save
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            profile_path = self.profiles_dir / f"{profile.poet_name}.json"
+            
+            with open(profile_path, 'w', encoding='utf-8') as f:
+                json.dump(profile.to_dict(), f, indent=2, ensure_ascii=False)
+            
+            # Cache the profile
+            self._loaded_profiles[profile.poet_name] = profile
+            return True
+            
+        except Exception as e:
+            print(f"Error saving profile for {profile.poet_name}: {e}")
+            return False
+    
+    def list_available_poets(self) -> List[str]:
+        """
+        List all available poet profiles.
+        
+        Returns:
+            List of poet names
+        """
+        poets = []
+        
+        # Add loaded profiles
+        poets.extend(self._loaded_profiles.keys())
+        
+        # Add profiles from disk
+        for profile_file in self.profiles_dir.glob("*.json"):
+            poet_name = profile_file.stem
+            if poet_name not in poets:
+                poets.append(poet_name)
+        
+        return sorted(poets)
+    
+    def create_profile_from_corpus(self, poet_name: str, corpus_path: Path) -> PoetProfile:
+        """
+        Create a poet profile from a corpus directory or file.
+        
+        Args:
+            poet_name: Name of the poet
+            corpus_path: Path to corpus file or directory
+            
+        Returns:
+            Created PoetProfile
+        """
+        builder = PoetProfileBuilder()
+        
+        if corpus_path.is_file():
+            # Single file
+            with open(corpus_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Split into poems (simple approach)
+            poems = [poem.strip() for poem in content.split('\n\n') if poem.strip()]
+            
+        elif corpus_path.is_dir():
+            # Directory of files
+            poems = []
+            for file_path in corpus_path.glob("*.txt"):
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read().strip()
+                    if content:
+                        poems.append(content)
+        else:
+            raise ValueError(f"Corpus path does not exist: {corpus_path}")
+        
+        profile = builder.build_profile(poems, poet_name)
+        
+        # Save the profile
+        self.save_profile(profile)
+        
+        return profile
+    
+    def compare_profiles(self, profile1: PoetProfile, profile2: PoetProfile) -> Dict[str, float]:
+        """
+        Compare two poet profiles and return similarity scores.
+        
+        Args:
+            profile1: First poet profile
+            profile2: Second poet profile
+            
+        Returns:
+            Dictionary of similarity scores for different aspects
+        """
+        similarities = {}
+        
+        # Compare lexical features
+        similarities['lexical_density'] = 1.0 - abs(profile1.lexical_density - profile2.lexical_density)
+        
+        # Compare vocabulary richness
+        ttr1 = profile1.vocabulary_richness.get('ttr', 0)
+        ttr2 = profile2.vocabulary_richness.get('ttr', 0)
+        similarities['vocabulary_richness'] = 1.0 - abs(ttr1 - ttr2)
+        
+        # Overall similarity (simplified)
+        similarities['overall'] = (similarities['lexical_density'] + similarities['vocabulary_richness']) / 2
+        
+        return similarities
+    
+    def validate_profile(self, profile: PoetProfile) -> bool:
+        """
+        Validate a poet profile for completeness and consistency.
+        
+        Args:
+            profile: PoetProfile to validate
+            
+        Returns:
+            True if valid, False otherwise
+        """
+        try:
+            # Check required fields
+            if not profile.poet_name:
+                return False
+            
+            if profile.corpus_size <= 0:
+                return False
+            
+            if profile.total_lines <= 0:
+                return False
+            
+            # Check lexical features
+            if not isinstance(profile.vocabulary_richness, dict):
+                return False
+            
+            if not (0 <= profile.lexical_density <= 1):
+                return False
+            
+            return True
+            
+        except Exception:
+            return False
