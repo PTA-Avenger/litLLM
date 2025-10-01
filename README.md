@@ -45,7 +45,7 @@ python -m src.cli.main generate --poet emily_dickinson --prompt "A bird came dow
 python -m src.cli.main analyze --file path/to/poem.txt --poet emily_dickinson
 
 # Train a new poet model
-python -m src.cli.main train --poet custom_poet --corpus path/to/corpus/
+python train_poet_model.py --poet custom_poet --corpus path/to/corpus/
 ```
 
 ## Documentation
@@ -53,6 +53,7 @@ python -m src.cli.main train --poet custom_poet --corpus path/to/corpus/
 ### User Documentation
 - [Installation Guide](docs/installation.md) - Complete setup instructions for all environments
 - [User Guide](docs/user_guide.md) - Comprehensive usage guide with examples
+- [Training Guide](docs/training_guide.md) - Complete model training guide (Local, Kaggle, AWS)
 - [Training Data Preparation](docs/training_data_preparation.md) - Complete guide for preparing training data
 - [Configuration Guide](docs/configuration.md) - Detailed configuration options and best practices
 - [Examples](docs/examples.md) - Practical examples and tutorials
@@ -65,6 +66,7 @@ python -m src.cli.main train --poet custom_poet --corpus path/to/corpus/
 ### Deployment Documentation
 - [Deployment Guide](deployment/README.md) - Docker and production deployment instructions
 - [AWS Deployment Guide](docs/aws_deployment.md) - Complete AWS deployment and training guide
+- [Kaggle Deployment Guide](docs/kaggle_deployment.md) - Free GPU training on Kaggle with corpus upload methods
 
 ## Architecture
 

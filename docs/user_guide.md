@@ -62,18 +62,27 @@ python poetry_cli.py compare --generated generated_poem.txt --original original_
 Train a model on a custom poet's corpus:
 
 ```bash
-# Prepare training data
-python poetry_cli.py prepare-data --corpus corpus_directory/ --poet custom_poet --output training_data.json
+# Quick training with the training script
+python train_poet_model.py \
+    --poet robert_frost \
+    --corpus data/corpus/frost_poems.txt \
+    --base-model gpt2-medium \
+    --epochs 3 \
+    --batch-size 8
 
-# Fine-tune model
-python poetry_cli.py train \
+# Advanced training with evaluation
+python train_poet_model.py \
     --poet custom_poet \
-    --training_data training_data.json \
-    --base_model gpt2-medium \
+    --corpus data/corpus/custom_poet/ \
+    --base-model gpt2-large \
     --epochs 5 \
-    --batch_size 8 \
-    --learning_rate 5e-5
+    --batch-size 16 \
+    --learning-rate 3e-5 \
+    --use-gpu \
+    --evaluate
 ```
+
+For detailed training instructions including Kaggle and AWS deployment, see the [Training Guide](training_guide.md).
 
 ## Python API
 

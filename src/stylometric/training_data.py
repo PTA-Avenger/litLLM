@@ -1146,3 +1146,102 @@ class TrainingDatasetFormatter:
                 balanced_examples.extend(sampled)
         
         return balanced_examples
+
+class TrainingDataProcessor:
+    """Main class for coordinating training data preparation and processing."""
+    
+    def __init__(self):
+        """Initialize the training data processor."""
+        self.corpus_loader = PoetryCorpusLoader()
+        self.feature_encoder = StylemetricFeatureEncoder()
+        self.dataset_formatter = TrainingDatasetFormatter()
+        
+    def process_corpus(self, corpus_path: Path, poet_name: str) -> Dict[str, Any]:
+        """
+        Process a complete corpus for training.
+        
+        Args:
+            corpus_path: Path to the corpus file or directory
+            poet_name: Name of the poet
+            
+        Returns:
+            Dictionary containing processed training data
+        """
+        # Load corpus
+        if corpus_path.is_file():
+            poems = self.corpus_loader.load_corpus_from_file(corpus_path, poet_name)
+        else:
+            poems = self.corpus_loader.load_corpus_from_directory(corpus_path, poet_name)
+        
+        # Validate corpus quality
+        quality_report = self.corpus_loader.validate_corpus_quality(poems)
+        
+        # Create training examples
+        training_examples = self.dataset_formatter.create_instruction_output_pairs(poems)
+        
+        return {
+            'poems': poems,
+            'examples': training_examples,
+            'quality_report': quality_report,
+            'poet_name': poet_name
+        }
+    
+    def create_training_examples(self, poems: List[Dict[str, Any]], 
+                               poet_profile: Optional[PoetProfile] = None) -> List[TrainingExample]:
+        """
+        Create training examples from poems.
+        
+        Args:
+            poems: List of poem dictionaries
+            poet_profile: Optional poet profile for feature encoding
+            
+        Returns:
+            List of TrainingExample objects
+        """
+        return self.dataset_formatter.create_instruction_output_pairs(poems, poet_profile)
+    
+    def split_dataset(self, training_examples: List[TrainingExample], 
+                     train_ratio: float = 0.8) -> Tuple[List[TrainingExample], List[TrainingExample]]:
+        """
+        Split dataset into train and validation sets.
+        
+        Args:
+            training_examples: List of training examples
+            train_ratio: Proportion for training set
+            
+        Returns:
+            Tuple of (train_examples, val_examples)
+        """
+        splits = self.dataset_formatter.create_dataset_splits(
+            training_examples, 
+            train_ratio=train_ratio, 
+            val_ratio=1.0-train_ratio, 
+            test_ratio=0.0
+        )
+        return splits['train'], splits['val']
+    
+    def save_training_data(self, training_examples: List[TrainingExample], 
+                          output_path: Path, format_type: str = "jsonl") -> None:
+        """
+        Save training data to file.
+        
+        Args:
+            training_examples: List of training examples
+            output_path: Path to save the data
+            format_type: Format type ('jsonl', 'json', 'huggingface')
+        """
+        self.dataset_formatter.save_training_data(training_examples, output_path, format_type)
+    
+    def prepare_for_huggingface(self, training_examples: List[TrainingExample],
+                               format_style: str = 'instruction_following') -> List[Dict[str, Any]]:
+        """
+        Prepare training data for HuggingFace transformers.
+        
+        Args:
+            training_examples: List of training examples
+            format_style: Style of formatting
+            
+        Returns:
+            List of formatted examples
+        """
+        return self.dataset_formatter.format_for_huggingface(training_examples, format_style)
